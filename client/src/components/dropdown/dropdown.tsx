@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import './dropdown.scss';
 import { cn } from "../../utils/cls";
 import useVisible from "../../hooks/use-visible";
+import { ChevronRightIcon } from "../icons/chevron/chevron";
 const cls = cn('dropdown');
 
 interface DropdownItem {
@@ -29,7 +30,8 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
                 onClick={() => setVisible(true)}
                 className={cls('value', { placeholder: !Boolean(props.value) })}
             >
-                    {props.value || 'Выберете компанию'}
+                {props.value || 'Выберете компанию'}
+                <ChevronRightIcon />
             </div>
             {visible && (
                 <div ref={ref} className={cls('content')}>

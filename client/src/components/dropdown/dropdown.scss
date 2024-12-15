@@ -7,6 +7,9 @@
         padding: 10px;
         font-weight: 600;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         &_placeholder {
             font-weight: 400;
