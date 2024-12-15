@@ -32,14 +32,16 @@ export const ShareFormField: React.FC<ShareFormFieldProps> = (props) => {
     const onSubmit = () => {
         if (chosenCompany && shareCount) {
             props.onSubmit(chosenCompany, shareCount);
+            setChosenCompany(null);
+            setShareCount(undefined);
             props.handleClose();
         }
     }
 
     return (
         <Modal
-            title={'Модалка'}
-            description={'Очень прикольная модалка для акций'}
+            title={'Добавить акции'}
+            description={'Выберете компанию и количество акций'}
             opened={props.opened}
             handleClose={props.handleClose}
         >
