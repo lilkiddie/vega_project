@@ -1,0 +1,11 @@
+.plus-icon {
+    width: 25px;
+    fill: var(--color-tertiary);
+    color: var(--color-primary);
+    transition: transform .15s ease;
+    cursor: pointer;
+}
+
+.plus-icon:hover {
+    transform: scale(1.05);
+}

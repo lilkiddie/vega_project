@@ -1,0 +1,11 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__item {
+        background-color: var(--color-pre-primary);
+        border-radius: 20px;
+        padding: 15px 40px;
+    }
+}

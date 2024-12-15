@@ -1,0 +1,29 @@
+.button {
+    padding: 5px 20px;
+    border: none;
+    background: none;
+    color: var(--color-primary);
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s ease;
+
+    &_view {
+        &_primary {
+            background: var(--color-tertiary);
+        }
+
+        &_secondary {
+            border: 2px solid var(--color-tertiary);
+        }
+
+        &_accent {
+            background: var(--color-accent);
+        }
+    }
+}
+
+.button:hover {
+    transform: scale(1.03);
+}

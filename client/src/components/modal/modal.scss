@@ -1,0 +1,30 @@
+.modal {
+    display: inline-flex;
+    flex-direction: column;
+    background-color: var(--color-tertiary);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 40px;
+    border-radius: 20px;
+
+    &__title {
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    &__description {
+        font-size: .9rem;
+        font-weight: 300;
+        color: hsl(239, 50%, 70%);
+    }
+
+    &__content {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}

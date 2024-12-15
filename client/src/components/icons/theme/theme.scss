@@ -1,0 +1,14 @@
+.theme-icon {
+    width: 12px;
+    fill: var(--color-primary);
+    cursor: pointer;
+    background: var(--color-pre-primary);
+    padding: 8px 11px;
+    border-radius: 20px;
+    box-shadow: 0 2px 2px hsla(var(--hue), 50%, 10%, .3), 0 4px 4px hsla(var(--hue), 50%, 10%, .15);
+    transition: transform .3s ease;
+}
+
+.theme-icon:hover {
+    transform: scale(1.1);
+}

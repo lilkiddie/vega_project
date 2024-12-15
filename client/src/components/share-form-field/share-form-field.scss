@@ -1,0 +1,29 @@
+.share-form-field {
+    &__input {
+        outline: none;
+        border: none;
+        padding: 10px;
+        font-size: inherit;
+        border-radius: 7px;
+        background-color: var(--color-primary);
+        color: var(--color-tertiary);
+        width: -webkit-fill-available;
+        font-weight: 600;
+    }
+
+    &__input::placeholder {
+        font-weight: 400;
+        color: var(--color-tertiary);
+        font-size: .9rem;
+        font-family: "Montserrat", serif;
+    }
+
+    &__input:focus, &__input:focus{
+        outline: none;
+    }
+
+    &__add {
+        margin-top: 15px;
+        padding-block: 10px !important;
+    }
+}
