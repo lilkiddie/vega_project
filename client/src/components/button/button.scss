@@ -1,0 +1,25 @@
+.button {
+    padding: 5px 20px;
+    border: none;
+    background: none;
+    color: var(--color-primary);
+    border-radius: 10px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s ease;
+
+    &_view {
+        &_primary {
+            background: var(--color-tertiary);
+        }
+
+        &_secondary {
+            border: 2px solid var(--color-tertiary);
+        }
+    }
+}
+
+.button:hover {
+    transform: scale(1.03);
+}
