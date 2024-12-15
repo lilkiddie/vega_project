@@ -9,17 +9,26 @@ const cls = cn('form');
 
 export interface FormProps {};
 
+type SelectedProps = {
+    key: string;
+    count: number;
+}[];
+
 export const Form: React.FC<FormProps> = (props) => {
     const {
         isLoading,
         data: companies,
     } = useGetCompaniesQuery();
 
+    const [selected, setSelected] = useState<SelectedProps>([]);
+
     const [openShareField, setOpenShareFieldl] = useState(false);
     const handleOpenShareField = () => setOpenShareFieldl(true);
     const handleCloseShareField = () => setOpenShareFieldl(false);
 
-    const [chosen, setChosen] = useState<string | null>(null);
+    const onAdd = (key: string, count: number) => {
+        setSelected(prev => [...prev, { key, count }]);
+    }
 
     return (
         <div className={cls()}>
@@ -29,11 +38,10 @@ export const Form: React.FC<FormProps> = (props) => {
                 onClick={handleOpenShareField}
             />
             <ShareFormField
-                value={chosen}
                 companies={companies || []}
                 opened={openShareField}
                 handleClose={handleCloseShareField}
-                onChangeCompany={setChosen}
+                onSubmit={onAdd}
             />
             <Button
                 text={"Отправить"}

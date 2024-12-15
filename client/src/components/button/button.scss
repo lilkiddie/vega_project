@@ -17,6 +17,10 @@
         &_secondary {
             border: 2px solid var(--color-tertiary);
         }
+
+        &_accent {
+            background: var(--color-accent);
+        }
     }
 }
 
