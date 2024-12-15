@@ -16,6 +16,7 @@ RUN apt-get install pkg-config -y
 RUN /vcpkg/vcpkg install crow
 RUN /vcpkg/vcpkg install cpp-httplib
 RUN /vcpkg/vcpkg install nlohmann-json
+RUN /vcpkg/vcpkg install fmt
 
 COPY ./project ./project
 
