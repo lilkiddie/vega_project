@@ -4,9 +4,14 @@
   "private": true,
   "dependencies": {
     "@bem-react/classname": "^1.6.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.2.0",
+    "@reduxjs/toolkit": "^2.5.0",
     "cra-template-typescript": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
     "react-scripts": "5.0.1",
     "sass": "^1.83.0"
   },
