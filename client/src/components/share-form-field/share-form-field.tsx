@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "../modal/modal";
-import { FormField } from "../../form-field/form-field";
+import { FormField } from "../form-field/form-field";
 import { Dropdown } from "../dropdown/dropdown";
 import { Company } from "../../api";
 
@@ -61,6 +61,7 @@ export const ShareFormField: React.FC<ShareFormFieldProps> = (props) => {
                 />
             </FormField>
             <Button
+                isDisabled={!Boolean(chosenCompany) || !Boolean(shareCount)}
                 onClick={onSubmit}
                 className={cls('add')}
                 text={"Добавить"}

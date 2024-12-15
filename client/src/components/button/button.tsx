@@ -12,6 +12,7 @@ export enum ButtonView {
 
 export interface ButtonProps {
     className?: string;
+    isDisabled?: boolean;
     text?: string;
     view: ButtonView;
     onClick?: () => void;
@@ -20,8 +21,8 @@ export interface ButtonProps {
 export const Button: React.FC<ButtonProps> = (props) => {
     return (
         <button
-            className={cls({view: props.view}, props.className)}
-            onClick={props.onClick}
+            className={cls({view: props.view, disabled: props.isDisabled}, props.className)}
+            onClick={props.isDisabled ? undefined : props.onClick}
         >
             {props.text}
         </button>

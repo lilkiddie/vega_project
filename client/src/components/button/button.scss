@@ -22,8 +22,17 @@
             background: var(--color-accent);
         }
     }
+
+    &_disabled {
+        opacity: 0.7;
+        cursor: default;
+    }
 }
 
 .button:hover {
     transform: scale(1.03);
+}
+
+.button_disabled:hover {
+    transform: none;
 }

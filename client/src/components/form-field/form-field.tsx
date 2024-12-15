@@ -1,7 +1,7 @@
 import React from "react";
 
 import './form-field.scss';
-import { cn } from "../utils/cls";
+import { cn } from "../../utils/cls";
 const cls = cn('form-field');
 
 export interface FormFieldProps {

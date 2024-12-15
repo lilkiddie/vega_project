@@ -53,7 +53,7 @@ export const Form: React.FC<FormProps> = (props) => {
                 ) : (
                     <Button
                         className={cls('add')}
-                        text={"Добавить"}
+                        text={"Добавить акции"}
                         view={ButtonView.Secondary}
                         onClick={handleOpenShareField}
                     />
@@ -65,12 +65,15 @@ export const Form: React.FC<FormProps> = (props) => {
                     onSubmit={onAddItem}
                 />
             </div>
-            <Button
-                className={cls('send')}
-                text={"Отправить"}
-                view={ButtonView.Primary}
-                onClick={() => console.log(selected)}
-            />
+            {selected.length > 0 && (
+                <Button
+                    isDisabled={selected.length === 0}
+                    className={cls('send')}
+                    text={"Отправить"}
+                    view={ButtonView.Primary}
+                    onClick={() => console.log(selected)}
+                />
+            )}
         </div>
     )
 }
