@@ -11,8 +11,8 @@ export interface MainProps {
 export const Main: React.FC<MainProps> = (props) => {
     return (
         <div className={cls()}>
-            {props.items.map(item => (
-                <div className={cls('item')}>{item}</div>
+            {props.items.map((item, idx) => (
+                <div className={cls('item')} key={idx}>{item}</div>
             ))}
         </div>
     )

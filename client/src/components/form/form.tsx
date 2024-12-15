@@ -5,6 +5,7 @@ import { cn } from "../../utils/cls";
 import { Button, ButtonView } from "../button/button";
 import { useGetCompaniesQuery } from "../../api";
 import { ShareFormField } from "../share-form-field/share-form-field";
+import { PlusIcon } from "../icons/plus/plus";
 const cls = cn('form');
 
 export interface FormProps {};
@@ -26,27 +27,49 @@ export const Form: React.FC<FormProps> = (props) => {
     const handleOpenShareField = () => setOpenShareFieldl(true);
     const handleCloseShareField = () => setOpenShareFieldl(false);
 
-    const onAdd = (key: string, count: number) => {
+    const onAddItem = (key: string, count: number) => {
         setSelected(prev => [...prev, { key, count }]);
     }
 
+    const onDeleteItem = (key: string) => {
+        setSelected(prev => prev.filter(item => item.key !== key));
+    }
+
     return (
-        <div className={cls()}>
+        <div className={cls({direction: Boolean(selected.length) ? 'column' : 'row'})}>
+            <div className={cls('add-wrapper')}>
+                {selected.map(item => (
+                    <div
+                        className={cls('selected-item')}
+                        key={item.key}
+                        onClick={() => onDeleteItem(item.key)}
+                    >
+                        {companies?.find(c => c.key === item.key)?.name}
+                        <span>{`x${item.count}`}</span>
+                    </div>
+                ))}
+                {selected.length ? (
+                    <PlusIcon onClick={handleOpenShareField} />
+                ) : (
+                    <Button
+                        className={cls('add')}
+                        text={"Добавить"}
+                        view={ButtonView.Secondary}
+                        onClick={handleOpenShareField}
+                    />
+                )}
+                <ShareFormField
+                    companies={companies || []}
+                    opened={openShareField}
+                    handleClose={handleCloseShareField}
+                    onSubmit={onAddItem}
+                />
+            </div>
             <Button
-                text={"Добавить"}
-                view={ButtonView.Secondary}
-                onClick={handleOpenShareField}
-            />
-            <ShareFormField
-                companies={companies || []}
-                opened={openShareField}
-                handleClose={handleCloseShareField}
-                onSubmit={onAdd}
-            />
-            <Button
+                className={cls('send')}
                 text={"Отправить"}
                 view={ButtonView.Primary}
-                onClick={() => console.log('send')}
+                onClick={() => console.log(selected)}
             />
         </div>
     )

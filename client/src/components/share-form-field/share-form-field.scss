@@ -13,7 +13,7 @@
 
     &__input::placeholder {
         font-weight: 400;
-        color: hsl(299, 80%, 10%);
+        color: var(--color-tertiary);
         font-size: .9rem;
         font-family: "Montserrat", serif;
     }

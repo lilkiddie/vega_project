@@ -1,5 +1,37 @@
 .form {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    &_direction {
+        &_column {
+            flex-direction: column;
+        }
+        &_raw {
+            flex-direction: row;
+        }
+    }
+
+    &__selected-item {
+        border: 2px solid var(--color-tertiary);
+        padding: 5px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: transform .15s ease;
+        cursor: pointer;
+
+        span {
+            margin-left: 5px;
+        }
+    }
+
+    &__selected-item:hover {
+        transform: scale(1.03);
+    }
+
+    &__add-wrapper {
+        display: flex;
+        gap: 10px;
+    }
 }
