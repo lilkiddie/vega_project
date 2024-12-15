@@ -1,15 +1,11 @@
 #include "crow.h"
 
+#include "routes/routes.h"
+
 int main() {
     crow::SimpleApp app;
 
-    CROW_ROUTE(app, "/")(
-        [](){
-            crow::json::wvalue x;
-            x["message"] = "Hello world!";
-            return x;
-        }
-    );
+    setupRoutes(app);
     
     app.port(18080).multithreaded().run();
 }
