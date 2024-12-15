@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-
-import './form.scss';
-import { cn } from "../../utils/cls";
 import { Button, ButtonView } from "../button/button";
 import { useGetCompaniesQuery } from "../../api";
 import { ShareFormField } from "../share-form-field/share-form-field";
 import { PlusIcon } from "../icons/plus/plus";
+
+import './form.scss';
+import { cn } from "../../utils/cls";
 const cls = cn('form');
 
-export interface FormProps {};
+export interface FormProps {
+    onSubmit: (selected: SelectedProps[]) => void;
+};
 
-type SelectedProps = {
+export interface SelectedProps {
     key: string;
     count: number;
-}[];
+};
 
 export const Form: React.FC<FormProps> = (props) => {
     const {
@@ -21,8 +23,7 @@ export const Form: React.FC<FormProps> = (props) => {
         data: companies,
     } = useGetCompaniesQuery();
 
-    const [selected, setSelected] = useState<SelectedProps>([]);
-
+    const [selected, setSelected] = useState<SelectedProps[]>([]);
     const [openShareField, setOpenShareFieldl] = useState(false);
     const handleOpenShareField = () => setOpenShareFieldl(true);
     const handleCloseShareField = () => setOpenShareFieldl(false);
@@ -72,7 +73,7 @@ export const Form: React.FC<FormProps> = (props) => {
                     className={cls('send')}
                     text={"Отправить"}
                     view={ButtonView.Accent}
-                    onClick={() => console.log(selected)}
+                    onClick={() => props.onSubmit(selected)}
                 />
             )}
         </div>

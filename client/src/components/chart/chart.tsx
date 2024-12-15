@@ -16,17 +16,16 @@ import { cn } from "../../utils/cls";
 const cls = cn('chart');
 
 interface ChartPoint {
-    date?: string;
+    date: string;
     price: number;
 }
 
 export interface ChartProps {
     width: number;
-    data: ChartPoint[];
+    data?: ChartPoint[];
 };
 
 const CustomTooltip = ({ label, payload }: TooltipProps<number, string>) => {
-    console.log(label, payload)
     if (label && payload && payload.length > 0) {
         return (
             <div className={cls('tooltip')}>

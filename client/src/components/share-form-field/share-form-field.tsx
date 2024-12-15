@@ -41,7 +41,7 @@ export const ShareFormField: React.FC<ShareFormFieldProps> = (props) => {
     return (
         <Modal
             title={'Добавить акции'}
-            description={'Выберете компанию и количество акций'}
+            description={'Выберите компанию и количество акций'}
             opened={props.opened}
             handleClose={props.handleClose}
         >

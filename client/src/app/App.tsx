@@ -44,19 +44,25 @@ const data = [
 
 function App() {
     const mainRef = useRef<HTMLDivElement>(null);
+    const interval = useRef<ReturnType<typeof setInterval> | null>(null);
     const [chartWidth, setCharWidth] = useState(0);
+    const [chartData, setChartData] = useState<typeof data | undefined>(undefined);
 
     const updateCharWidth = () => setCharWidth((mainRef.current?.offsetWidth || 500) - 80);
-
     useEffect(() => {
-        window.addEventListener("resize", updateCharWidth);
-    }, []);
-
-    useEffect(() => {
-        if (mainRef.current) {
-            updateCharWidth();
+        if (!interval.current) {
+            interval.current = setInterval(() => {
+                if (mainRef.current) {
+                    updateCharWidth();
+                    window.addEventListener("resize", updateCharWidth);
+                    console.log('qwer')
+                    if (interval.current) {
+                        clearInterval(interval.current);
+                    }
+                }
+            }, 300);
         }
-    }, [mainRef])
+    }, [])
 
     return (
         <div className={cls()}>
@@ -74,10 +80,10 @@ function App() {
                 <Main
                     ref={mainRef}
                     items={[
-                        <Form />,
+                        <Form onSubmit={(selected) => setChartData(data)}/>,
                         <Chart
                             width={chartWidth}
-                            data={data}
+                            data={chartData}
                         />,
                     ]}
                 />

@@ -30,7 +30,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
                 onClick={() => setVisible(true)}
                 className={cls('value', { placeholder: !Boolean(props.value) })}
             >
-                {props.value || 'Выберете компанию'}
+                {props.value || 'Выберите компанию'}
                 <ChevronRightIcon />
             </div>
             {visible && (
