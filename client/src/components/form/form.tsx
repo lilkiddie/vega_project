@@ -52,6 +52,7 @@ export const Form: React.FC<FormProps> = (props) => {
                     <PlusIcon onClick={handleOpenShareField} />
                 ) : (
                     <Button
+                        isDisabled={isLoading}
                         className={cls('add')}
                         text={"Добавить акции"}
                         view={ButtonView.Secondary}
@@ -70,7 +71,7 @@ export const Form: React.FC<FormProps> = (props) => {
                     isDisabled={selected.length === 0}
                     className={cls('send')}
                     text={"Отправить"}
-                    view={ButtonView.Primary}
+                    view={ButtonView.Accent}
                     onClick={() => console.log(selected)}
                 />
             )}
