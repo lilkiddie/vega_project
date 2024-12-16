@@ -1,0 +1,12 @@
+services:
+  backend:
+    build:
+      context: ./project
+    ports:
+      - "18080:18080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
