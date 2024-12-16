@@ -1,11 +1,21 @@
 services:
   backend:
     build:
-      context: ./project
+      context: ./server
     ports:
       - "18080:18080"
     networks:
       - app-network
+
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
 
 networks:
   app-network:

@@ -1,6 +1,6 @@
 #include "ping.h"
 
-void setupPingRoute(crow::SimpleApp &app) {
+void setupPingRoute(crow::SimpleApp& app) {
     CROW_ROUTE(app, "/")(
         [](){
             crow::response res;
@@ -9,5 +9,4 @@ void setupPingRoute(crow::SimpleApp &app) {
             return answ;
         }
     );
-
 }

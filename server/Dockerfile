@@ -23,11 +23,11 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY ./ ./app
+COPY ./ ./app/server
 
 WORKDIR ./app
 
-RUN mkdir build && cd build && cmake .. && make
+RUN mkdir build && cd build && cmake ../server && make
 
 CMD ["./build/app"]
 

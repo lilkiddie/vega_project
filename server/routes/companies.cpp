@@ -31,6 +31,9 @@ void setupCompaniesRoute(crow::SimpleApp &app) {
 
             const nlohmann::json companiesMappingJson = companiesMapping;
             response.body = companiesMappingJson.dump();
+            response.add_header("Access-Control-Allow-Origin", "http://localhost:3000");
+            response.add_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            response.add_header("Access-Control-Allow-Headers", "Content-Type");
             return response;
         }
     );
