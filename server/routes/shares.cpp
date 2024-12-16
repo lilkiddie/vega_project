@@ -7,9 +7,9 @@
 #include "../src/http_client.h"
 #include "../utils/utils.hpp"
 
-void setupSharesRoute(crow::SimpleApp& app) {
+void setupSharesRoute(crow::App<CORSHandler>& app) {
     CROW_ROUTE(app, "/api/companies/shares").methods(crow::HTTPMethod::Post)(
-        [](const crow::request& req){
+        [](const crow::request& req, crow::response& res){
             MoexHttpClient client;
 
             auto from = req.url_params.get("from");
@@ -49,14 +49,15 @@ void setupSharesRoute(crow::SimpleApp& app) {
             for (const auto& [company_name, cnt] : shares) {
                 const auto client_res = client.get_moex_company_shares(company_name, from_, to_);
 
-                auto response = crow::response(client_res.status);
+                res.code = client_res.status;
                 std::string body;
 
-                if (response.code != 200) {
+                if (res.code != 200) {
                     crow::json::wvalue err_answ;
                     err_answ["error"] = "Failed to fetch company shares";
-                    response.body = err_answ.dump();
-                    return response;
+                    res.write(err_answ.dump());
+                    res.end();
+                    return;
                 }
 
                 const nlohmann::json response_json = nlohmann::json::parse(client_res.body);
@@ -69,7 +70,7 @@ void setupSharesRoute(crow::SimpleApp& app) {
                 }
             }
             
-            crow::json::wvalue response;
+            crow::json::wvalue json;
             
             for (const auto& [date, shares] : bag) {
                 auto sum = std::accumulate(
@@ -81,15 +82,11 @@ void setupSharesRoute(crow::SimpleApp& app) {
                 );
                 std::ostringstream ss;
                 ss << std::fixed << std::setprecision(2) << sum;
-                response[date] = ss.str();
+                json[date] = ss.str();
             }
             
-
-            auto res = crow::response{response};
-            res.add_header("Access-Control-Allow-Origin", "http://localhost:3000");
-            res.add_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            res.add_header("Access-Control-Allow-Headers", "Content-Type");
-            return res;
+            res.write(json.dump());
+            res.end();
         }
     );
 }

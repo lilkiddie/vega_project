@@ -1,12 +1,10 @@
 #include "ping.h"
 
-void setupPingRoute(crow::SimpleApp& app) {
+void setupPingRoute(crow::App<CORSHandler>& app) {
     CROW_ROUTE(app, "/")(
-        [](){
-            crow::response res;
-            crow::json::wvalue answ;
-            answ["message"] = "Hello world!";
-            return answ;
+        [](const crow::request&, crow::response& res){
+            res.write("Hello world!");
+            res.end();
         }
     );
 }

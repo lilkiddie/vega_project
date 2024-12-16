@@ -1,9 +1,10 @@
 #include "crow.h"
 
 #include "routes/routes.h"
+#include "src/cors.h"
 
 int main() {
-    crow::SimpleApp app;
+    crow::App<CORSHandler> app;
 
     setupRoutes(app);
 

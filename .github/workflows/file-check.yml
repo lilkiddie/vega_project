@@ -18,7 +18,7 @@ jobs:
 
       - name: Check for required files
         run: |
-          required_files=("README.md" "project/main.cpp" "project/CMakeLists.txt" "Dockerfile")
+          required_files=("README.md" "server/main.cpp" "server/CMakeLists.txt" "docker-compose.yml")
           missing_files=()
           
           for file in "${required_files[@]}"; do

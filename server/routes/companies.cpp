@@ -6,20 +6,21 @@
 #include "nlohmann/json.hpp"
 
 
-void setupCompaniesRoute(crow::SimpleApp &app) {
+void setupCompaniesRoute(crow::App<CORSHandler> &app) {
     CROW_ROUTE(app, "/api/companies")(
-        [](){
+        [](const crow::request&, crow::response& res){
             MoexHttpClient client;
 
             const auto client_res = client.get_moex_companies();
-            auto response = crow::response(client_res.status);
+            res.code = client_res.status;
             std::string body;
 
-            if (response.code != 200) {
+            if (res.code != 200) {
                 crow::json::wvalue err_answ;
                 err_answ["error"] = "Failed to fetch companies data";
-                response.body = err_answ.dump();
-                return response;
+                res.write(err_answ.dump());
+                res.end();
+                return;
             }
 
             std::unordered_map<std::string, std::string> companiesMapping;
@@ -30,11 +31,8 @@ void setupCompaniesRoute(crow::SimpleApp &app) {
             }
 
             const nlohmann::json companiesMappingJson = companiesMapping;
-            response.body = companiesMappingJson.dump();
-            response.add_header("Access-Control-Allow-Origin", "http://localhost:3000");
-            response.add_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            response.add_header("Access-Control-Allow-Headers", "Content-Type");
-            return response;
+            res.write(companiesMappingJson.dump());
+            res.end();
         }
     );
 }

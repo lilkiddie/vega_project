@@ -1,6 +1,7 @@
 #pragma once
 
 #include "crow.h"
+#include "../src/cors.h"
 
 
-void setupCompaniesRoute(crow::SimpleApp& app);
+void setupCompaniesRoute(crow::App<CORSHandler>& app);
