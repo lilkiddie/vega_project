@@ -18,6 +18,8 @@ export const Form: React.FC<FormProps> = (props) => {
         data: companies,
     } = useGetCompaniesQuery();
 
+    const companiesList = Object.entries(companies || {}).map(([ key, name ]) => ({ key, name }));
+
     const [selected, setSelected] = useState<ShareData[]>([]);
     const [openShareField, setOpenShareFieldl] = useState(false);
     const handleOpenShareField = () => setOpenShareFieldl(true);
@@ -40,7 +42,7 @@ export const Form: React.FC<FormProps> = (props) => {
                         key={item.key}
                         onClick={() => onDeleteItem(item.key)}
                     >
-                        {companies?.find(c => c.key === item.key)?.name}
+                        {companiesList?.find(c => c.key === item.key)?.name}
                         <span className={cls('selected-item__count')}>
                             <span>{'x'}</span>
                             {item.count}
@@ -59,7 +61,7 @@ export const Form: React.FC<FormProps> = (props) => {
                     />
                 )}
                 <ShareFormField
-                    companies={companies || []}
+                    companies={companiesList}
                     opened={openShareField}
                     handleClose={handleCloseShareField}
                     onSubmit={onAddItem}
