@@ -48,6 +48,7 @@ function App() {
                 <header className={cls('header')}>
                     <a
                         target='_blank'
+                        rel="noreferrer"
                         href='https://github.com/lilkiddie/vega_project'
                         className={cls('header-link')}
                     >

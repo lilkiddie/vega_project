@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import './dropdown.scss';
 import { cn } from "../../utils/cls";
