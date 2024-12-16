@@ -15,7 +15,6 @@ add_executable(
     routes/ping.cpp
     routes/companies.cpp
     routes/shares.cpp
-    tests/tests_requests.cpp
 )
 
 target_link_libraries(
