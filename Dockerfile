@@ -17,12 +17,14 @@ RUN /vcpkg/vcpkg install crow
 RUN /vcpkg/vcpkg install cpp-httplib
 RUN /vcpkg/vcpkg install nlohmann-json
 RUN /vcpkg/vcpkg install fmt
-RUN apt install libboost-all-dev -y
+RUN apt-get install libboost-all-dev -y
+RUN apt-get install nodejs npm -y
 
-COPY ./project ./project
+COPY ./project ./app/server
+COPY ./client ./app/client
 
-WORKDIR /build
+WORKDIR ./app/build
 
-RUN bash -c "cmake ../project && make"
+RUN bash -c "cmake ../server && make"
 
 CMD ["bash"]
