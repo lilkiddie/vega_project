@@ -17,6 +17,7 @@ RUN /vcpkg/vcpkg install crow
 RUN /vcpkg/vcpkg install cpp-httplib
 RUN /vcpkg/vcpkg install nlohmann-json
 RUN /vcpkg/vcpkg install fmt
+RUN apt install libboost-all-dev -y
 
 COPY ./project ./project
 
