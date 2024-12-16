@@ -15,14 +15,9 @@ import './chart.scss';
 import { cn } from "../../utils/cls";
 const cls = cn('chart');
 
-interface ChartPoint {
-    date: string;
-    price: number;
-}
-
 export interface ChartProps {
     width: number;
-    data?: ChartPoint[];
+    data?: Record<string, number>;
 };
 
 const CustomTooltip = ({ label, payload }: TooltipProps<number, string>) => {
@@ -45,12 +40,14 @@ export const Chart: React.FC<ChartProps> = (props) => {
         )
     }
 
+    const chartData = Object.entries(props.data).map(([ date, price ]) => ({ date, price }));
+
     return (
         <div className={cls()}>
             <LineChart
                 width={props.width}
                 height={500}
-                data={props.data}
+                data={chartData}
                 margin={{
                     left: 0,
                     right: 0,

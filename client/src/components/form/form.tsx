@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, ButtonView } from "../button/button";
-import { useGetCompaniesQuery } from "../../api";
+import { ShareData, useGetCompaniesQuery } from "../../api";
 import { ShareFormField } from "../share-form-field/share-form-field";
 import { PlusIcon } from "../icons/plus/plus";
 
@@ -9,12 +9,7 @@ import { cn } from "../../utils/cls";
 const cls = cn('form');
 
 export interface FormProps {
-    onSubmit: (selected: SelectedProps[]) => void;
-};
-
-export interface SelectedProps {
-    key: string;
-    count: number;
+    onSubmit: (selected: ShareData[]) => void;
 };
 
 export const Form: React.FC<FormProps> = (props) => {
@@ -23,7 +18,7 @@ export const Form: React.FC<FormProps> = (props) => {
         data: companies,
     } = useGetCompaniesQuery();
 
-    const [selected, setSelected] = useState<SelectedProps[]>([]);
+    const [selected, setSelected] = useState<ShareData[]>([]);
     const [openShareField, setOpenShareFieldl] = useState(false);
     const handleOpenShareField = () => setOpenShareFieldl(true);
     const handleCloseShareField = () => setOpenShareFieldl(false);
@@ -46,7 +41,10 @@ export const Form: React.FC<FormProps> = (props) => {
                         onClick={() => onDeleteItem(item.key)}
                     >
                         {companies?.find(c => c.key === item.key)?.name}
-                        <span>{`x${item.count}`}</span>
+                        <span className={cls('selected-item__count')}>
+                            <span>{'x'}</span>
+                            {item.count}
+                        </span>
                     </div>
                 ))}
                 {selected.length ? (
@@ -71,7 +69,7 @@ export const Form: React.FC<FormProps> = (props) => {
                 <Button
                     isDisabled={selected.length === 0}
                     className={cls('send')}
-                    text={"Отправить"}
+                    text={"Рассчитать"}
                     view={ButtonView.Accent}
                     onClick={() => props.onSubmit(selected)}
                 />

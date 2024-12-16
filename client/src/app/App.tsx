@@ -8,45 +8,16 @@ import { Form } from '../components/form/form';
 import { Chart } from '../components/chart/chart';
 
 import './App.scss';
+import { ShareData, useGetChartInfoMutation } from '../api';
 
 const cls = cn('app');
-
-const data = [
-    {
-        date: '15.12.2024',
-        price: 4000,
-    },
-    {
-        date: '16.12.2024',
-        price: 3000,
-    },
-    {
-        date: '17.12.2024',
-        price: 9800,
-    },
-    {
-        date: '18.12.2024',
-        price: 3908,
-    },
-    {
-        date: '19.12.2024',
-        price: 4800,
-    },
-    {
-        date: '20.12.2024',
-        price: 3800,
-    },
-    {
-        date: '21.12.2024',
-        price: 3900,
-    },
-];
 
 function App() {
     const mainRef = useRef<HTMLDivElement>(null);
     const interval = useRef<ReturnType<typeof setInterval> | null>(null);
     const [chartWidth, setCharWidth] = useState(0);
-    const [chartData, setChartData] = useState<typeof data | undefined>(undefined);
+    const [chartData, setChartData] = useState<Record<string, number> | undefined>(undefined);
+    const [getChartData] = useGetChartInfoMutation();
 
     const updateCharWidth = () => setCharWidth((mainRef.current?.offsetWidth || 500) - 80);
     useEffect(() => {
@@ -64,6 +35,13 @@ function App() {
         }
     }, [])
 
+    const onSubmit = async (selected: ShareData[]) => {
+        const result = await getChartData(selected);
+        if (result.data) {
+            setChartData(result.data);
+        }
+    }
+
     return (
         <div className={cls()}>
             <Layout>
@@ -73,14 +51,14 @@ function App() {
                         href='https://github.com/lilkiddie/vega_project'
                         className={cls('header-link')}
                     >
-                        {'Sosal Inc.'}
+                        {'Github Link'}
                     </a>
                     <ThemeIcon />
                 </header>
                 <Main
                     ref={mainRef}
                     items={[
-                        <Form onSubmit={(selected) => setChartData(data)}/>,
+                        <Form onSubmit={onSubmit}/>,
                         <Chart
                             width={chartWidth}
                             data={chartData}

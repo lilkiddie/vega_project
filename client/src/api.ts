@@ -6,14 +6,26 @@ export interface Company {
     name: string;
 }
 
+export interface ShareData {
+    key: string;
+    count: number;
+}
+
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: apiHost }),
     endpoints: (builder) => ({
-    getCompanies: builder.query<Company[], void>({
-        query: () => ({ url: '/companies' }),
-    }),
+        getCompanies: builder.query<Company[], void>({
+            query: () => ({ url: '/companies' }),
+        }),
+        getChartInfo: builder.mutation<Record<string, number>, ShareData[]>({
+            query: (data: ShareData[]) => ({
+                url: '/shares',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
-export const { useGetCompaniesQuery } = api;
+export const { useGetCompaniesQuery, useGetChartInfoMutation } = api;
