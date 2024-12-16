@@ -21,4 +21,7 @@
 
 ![Снимок экрана 2024-12-16 в 18 15 32](https://github.com/user-attachments/assets/5a3072b9-a528-4074-8fde-e864df3f18a1)
 
+### Локальная сборка
+docker compose up --build
+приложение расположено на localhost:3000
 
